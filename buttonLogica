@@ -4,7 +4,8 @@ const uint8_t PIN_LED = 27;
 /*---------Variaveis------------*/
 bool led_state = LOW;
 bool pressionado = LOW;
-bool botao_anterior = LOW;
+bool botao_anterior = LOW;.
+long tempo = 0;
 
 
 void setup() 
@@ -19,11 +20,12 @@ void setup()
 void loop() 
 {
   botao_anterior = pressionado;
-  bool pressionado = digitalRead(PIN_BUTTON);
+  pressionado = digitalRead(PIN_BUTTON);
 
-  if(pressionado && !botao_anterior)
+  if(pressionado && !botao_anterior && (millis() - tempo > 50))
   {
     led_state = !led_state;
     digitalWrite(PIN_LED, led_state);
+    tempo = millis();
   }
 }
