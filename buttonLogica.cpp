@@ -1,10 +1,11 @@
-const uint8_t PIN_BUTTON = 21;
-const uint8_t PIN_LED = 26;
+const uint8_t PIN_BUTTON = 14;
+const uint8_t PIN_LED = 27;
 
 /*---------Variaveis------------*/
 bool led_state = LOW;
-bool botao_anterior;
-
+bool pressionado = LOW;
+bool botao_anterior = LOW;
+long tempo = 0;
 
 void setup() 
 {
@@ -12,17 +13,17 @@ void setup()
   pinMode(PIN_LED, OUTPUT);
 
   digitalWrite(PIN_LED, LOW);
-  
 }
 
 void loop() 
 {
-  bool pressionado = digitalRead(PIN_BUTTON);
+  botao_anterior = pressionado;
+  pressionado = digitalRead(PIN_BUTTON);
 
-
-  if(pressionado && !botao_anterior)
+  if(pressionado && !botao_anterior && (millis() - tempo > 50))
   {
     led_state = !led_state;
     digitalWrite(PIN_LED, led_state);
+    tempo = millis();
   }
 }
