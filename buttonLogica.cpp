@@ -1,5 +1,5 @@
-const uint8_t PIN_BUTTON = 14;
-const uint8_t PIN_LED = 27;
+const uint8_t PIN_BUTTON = 21;
+const uint8_t PIN_LED = 26;
 
 /*---------Variaveis------------*/
 bool led_state = LOW;
@@ -13,6 +13,8 @@ void setup()
   pinMode(PIN_LED, OUTPUT);
 
   digitalWrite(PIN_LED, LOW);
+
+  Serial.begin(115200);//inicializa comunicação via USB, e passa o valor da velocidade da comunicação 
 }
 
 void loop() 
@@ -26,4 +28,6 @@ void loop()
     digitalWrite(PIN_LED, led_state);
     tempo = millis();
   }
+
+    Serial.println(led_state); // manda que pula de linha 
 }
