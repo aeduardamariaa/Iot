@@ -31,11 +31,11 @@ const Vector<float> NTC_10K_res = { 1214600, 844390, 592430, 419380, 299480,
                               645.2, 549.4, 470.0, 403.6, 347.4,
                               300.1, 260.1 };
 
-const char* WIFI_SSID = "Andrép";
-const char* WIFI_PWD = "naotemsenha";
+const char* WIFI_SSID = "Shrek";
+const char* WIFI_PWD = "chorameliga";
 
-const char* FB_HOST = "https://iot-dta-marcos-default-rtdb.firebaseio.com/"; // banco andré
-const char* FB_KEY = "ApW5strb0l1yfEaB7leQNsIeBIaI08400EZ6GR8U"; // banco andré
+const char* FB_HOST = "https://iiot-dta-default-rtdb.firebaseio.com/";
+const char* FB_KEY = "Ag5gJMhAnTWQgDVhegkDRF1uTjJfpMUDkXB8WBEa";
 
 FirebaseData fbdo;
 FirebaseAuth fbauth;
@@ -132,7 +132,7 @@ void loop()
   json.set("/maquina1/temperatura/value2", voltage_ntc_2);
   json.set("/maquina1/luminosidade/value1", voltage_ldr);
 
-  if (Firebase.updateNode(fbdo, "iot-dta-marcos", json))
+  if (Firebase.updateNode(fbdo, "iiot-dta/subsys_05", json))
   {
     Serial.println("Dado salvo com sucesso!");
   }
