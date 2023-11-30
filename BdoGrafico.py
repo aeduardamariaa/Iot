@@ -1,7 +1,10 @@
+import datetime 
 import json
 import requests
 import matplotlib.pyplot as plt
 import numpy as np
+import time
+
 
 def get_request(url, proxy, auth):
     req = requests.get(url, proxies =proxy, auth=auth)
@@ -38,13 +41,16 @@ for i, j in zip(range(dados_len),indices):
     except KeyError:
         pass
 
+luminosity_mean = np.mean(luminosity)
+temp_sensor_00_mean = np.mean(temp_sensor_00[~np.isnan(temp_sensor_00)])
+temp_sensor_01_mean = np.mean(temp_sensor_01[~np.isnan(temp_sensor_01)])
+
 fig, axs = plt.subplots(3, figsize=(16, 8), gridspec_kw={"hspace":0.4})
-fig.supxlabel("Indices")
+fig.supxlabel("Tempo")
 ax_luminosity, ax_temp_sensor_00, ax_temp_sensor_01 = axs
 
 ax_luminosity.grid()
 ax_luminosity.set_ylabel("Luminosidade")
-
 
 ax_temp_sensor_00.grid()
 ax_temp_sensor_00.set_ylabel("Temp sensor 0")
@@ -52,11 +58,19 @@ ax_temp_sensor_00.set_ylabel("Temp sensor 0")
 ax_temp_sensor_01.grid()
 ax_temp_sensor_01.set_ylabel("Temp sensor 1")
 
-ax_luminosity.plot(indices, luminosity, linestyle='', marker='o', markersize=5, color='r')
-ax_temp_sensor_00.plot(indices, temp_sensor_00, linestyle='', marker='o', markersize=5, color='r')
-ax_temp_sensor_01.plot(indices, temp_sensor_01, linestyle='', marker='o', markersize=5, color='r')
+plt.ion()
+fig.show()
+fig.canvas.draw()
 
-plt.show()
+while True:
+    tempo_atual = datetime.datetime.now()
+    ax_luminosity.plot(indices, luminosity_mean, linestyle='', marker='o', markersize=5, color='r')
+    ax_temp_sensor_00.plot(indices, temp_sensor_00_mean, linestyle='', marker='o', markersize=5, color='r')
+    ax_temp_sensor_01.plot(indices, temp_sensor_01_mean, linestyle='', marker='o', markersize=5, color='r')
+
+    fig.canvas.draw()
+    time.sleep(15)
+
 
 # #fazendo grafico
 # plt.plot(indices, luminosity, linestyle='', maker='o', markersize=5, color='r')
