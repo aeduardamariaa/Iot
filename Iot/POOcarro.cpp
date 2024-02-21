@@ -10,6 +10,14 @@ class Carro{
     string motor;
     int rodas;
   public:
+    Carro(){
+      
+    }// para criar obj sem nada 
+    Carro(string cor, string motor, int rodas){
+      this->cor = cor;
+      this->motor = motor;
+      this->rodas = rodas;
+    }
     void barulho(){
       cout<<"Biiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii"<<endl;
     };
