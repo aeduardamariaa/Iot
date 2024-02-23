@@ -29,9 +29,11 @@ public:
     }
 
     void set_dia(int d) {
-        if ((bi == 1 && d > 0 && d <= 29) || (bi == 0 && d > 0 && d <= 31)) {
+        if ((bi == 1 && mes == 2 && d > 0 && d <= 29) || (bi == 0 && mes == 2 && d > 0 && d <= 28)) {
             dia = d;
-        } else {
+        } else  if(mes != 2 && d > 0 && d <= 31){
+            dia = d;
+        }else{
             cout << "Dia inválido" << endl;
         }
     }
