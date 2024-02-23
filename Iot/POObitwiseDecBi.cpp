@@ -3,23 +3,6 @@
 
 using namespace std;
 
-vector<unsigned char> decimalParaBinario(int decimal) {
-    vector<unsigned char> binario;
-
-    while (decimal > 0) {
-        binario.push_back(static_cast<unsigned char>(decimal % 2));
-        decimal /= 2;
-    }
-
-    for (int i = 0, j = binario.size() - 1; i < j; i++, j--) {
-        int temp = binario[i];
-        binario[i] = binario[j];
-        binario[j] = temp;
-    }
-
-    return binario;
-}
-
 class Binario {
   private:
       int num;
@@ -28,12 +11,12 @@ class Binario {
   public:
       Binario(int num) {
           this->num = num;
-          convert();
+          bi = decimalParaBinario(num);
       }
   
       void set_num(int num) {
           this->num = num;
-          convert();
+          bi = decimalParaBinario(num);
       }
   
       void print() {
@@ -44,9 +27,22 @@ class Binario {
           }
           cout << endl;
       }
-  
-      void convert() {
-          bi = decimalParaBinario(num);
+
+      vector<unsigned char> decimalParaBinario(int decimal) {
+          vector<unsigned char> binario;
+
+          while (decimal > 0) {
+              binario.push_back(static_cast<unsigned char>(decimal % 2));
+              decimal /= 2;
+          }
+
+          for (int i = 0, j = binario.size() - 1; i < j; i++, j--) {
+              int temp = binario[i];
+              binario[i] = binario[j];
+              binario[j] = temp;
+          }
+
+          return binario;
       }
 };
 
