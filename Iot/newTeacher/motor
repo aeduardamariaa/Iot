@@ -1,0 +1,24 @@
+int IN1 = 8;
+int IN2 = 9;
+int IN3 = 11;
+int IN4 = 10;
+int ENA = 6; //motor a
+int ENB = 5; // motor b
+char letra; // letra que sera lida pelo envio no terminal 
+//serial para ser utilizado no case 'F'
+
+void setup()
+{
+  Serial.begin(9600); // inicializa a serial para a comunicação
+  pinMode(IN1, OUTPUT); // pin de saída
+  pinMode(IN2, OUTPUT); // pin de saída
+  pinMode(IN3, OUTPUT); // pin de saída
+  pinMode(IN4, OUTPUT); // pin de saída
+}
+
+void loop()
+{
+  if(Serial.available()>0) { // verifica se alguma mensagem foi enviada
+  	letra = Serial.read();
+  }
+}
